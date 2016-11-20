@@ -9,6 +9,6 @@ And I did. Then I read at https://blog.golang.org/package-names
 "Avoid meaningless package names. Packages named util, common, or 
 misc provide clients with no sense of what the package contains."
 
-I remaned to 'txtutil' hoping that was a good name (and not really
+I renamed to 'txtutil' hoping that was a good name (and not really
 thionkoing so.)
 
