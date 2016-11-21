@@ -1,8 +1,15 @@
-package dump
+package txtutil
 
 import (
-  "fmt"
+	"fmt"
 )
+
+func endLine(str []byte) {
+  // filler := 16 - len(str)   // how many chars to fill line
+  // fill :=  make([]byte,filler, ' ') //[filler]byte
+  // str = append(str, fill)
+  fmt.Printf("|%s|\n", str)
+}
 
 // Format output similarly to 'hexdump -D'
 func Dump(b string) {
@@ -37,6 +44,7 @@ func Dump(b string) {
 
 		chars++
 	}
+  endLine(asciiRep)
 }
 
 //}
