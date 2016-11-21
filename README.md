@@ -6,9 +6,8 @@ but they have nothing to do with the Orvibo S20 - Dump is just
 useful for debugging to see messages as sent and received. I figured
 I'd create a separate 'util' repo and put stuff like this in there.
 And I did. Then I read at https://blog.golang.org/package-names
-"Avoid meaningless package names. Packages named util, common, or 
+"Avoid meaningless package names. Packages named util, common, or
 misc provide clients with no sense of what the package contains."
 
 I renamed to 'txtutil' hoping that was a good name (and not really
-thionkoing so.)
-
+thinking so.)
