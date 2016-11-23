@@ -11,3 +11,6 @@ misc provide clients with no sense of what the package contains."
 
 I renamed to 'txtutil' hoping that was a good name (and not really
 thinking so.)
+
+## testing
+`go test [-v] example_test.go`
