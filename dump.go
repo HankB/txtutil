@@ -1,19 +1,11 @@
+// Package txtutil provides the ability to dump binary (or ASCII) data to
+// the console.
 package txtutil
 
 import (
 	"fmt"
 )
 
-// analog of libc strlen on a []byte
-/*	i := 0
-	for ; i < len(s); i++ {
-		if s[i] == 0 {
-			break
-		}
-	}
-	return i
-}
-*/
 const count = 16 // Number of bytes to print each line
 
 // endLine has two jobs. First pad remainder of line if <16
@@ -28,40 +20,30 @@ hbarta@swanky:~/Documents/go-wks/src/github.com/HankB/playground$ hexdump -C ~/g
 hbarta@swanky:~/Documents/go-wks/src/github.com/HankB/playground$
 */
 func endLine(str []byte) {
-  add := count - len(str)
-  //fmt.Printf("add=%d", add)
-  if add < 0 {  // test for pathalogical case
-    add = 0
-  }
-  // add spaces so ASCII rep lines up with previous line
-  for i:=0; i<add; i++ {
-    fmt.Printf("   ")
-  }
-  // add an extra 'midline' space
-  if add >= count/2 {
-    fmt.Printf(" ")
-  }
+	add := count - len(str)
+	if add < 0 { // test for pathalogical case
+		add = 0
+	}
+	// add spaces so ASCII rep lines up with other lines
+	for i := 0; i < add; i++ {
+		fmt.Printf("   ")
+	}
+	// add an extra 'midline' space when needed
+	if add >= count/2 {
+		fmt.Printf(" ")
+	}
 	fmt.Printf(" |%s|\n", str)
 }
 
-// Format output similarly to 'hexdump -D'
-// pass both strting and length since the string can include nil values
-// the length of valid characters is included t
+// Dump binary data using format similar to 'hexdump -C'
 func Dump(b string) {
 	chars := 0 // chars printed
 	asciiRep := []byte{}
 	for i := 0; i < len(b); i++ { // iterate over entire array
 		if (chars % 16) == 0 { // starting a full row?
 			if chars > 0 { // need to print end of previous line?
-				for i := 0; (i+chars)%16 != 0; i++ { // fill out line < 16 bytes
-					fmt.Printf("   ")
-					asciiRep = append(asciiRep, ' ')
-					if chars < 8 {
-						asciiRep = append(asciiRep, ' ')
-					}
-					fmt.Printf("  |%s|\n", asciiRep)
-					asciiRep = []byte{}
-				}
+				endLine(asciiRep)   //print end of stuff
+				asciiRep = []byte{} // clear end of line buffer
 			}
 			fmt.Printf("%8.8x  ", chars)
 		} else if (chars % 8) == 0 { // mid row?
@@ -79,11 +61,13 @@ func Dump(b string) {
 
 		chars++
 	}
-  endLine(asciiRep)
+	if len(asciiRep) > 0 { // starting a full row?
+		endLine(asciiRep)
+	}
+	fmt.Printf("%8.8x\n", chars) // print final character count
 }
 
-//}
-
+// IsPrint() is exported only for testing. (Can't get the export_test.g thing to work)
 func IsPrint(b byte) bool {
 	if b >= ' ' && b <= '~' {
 		return true
