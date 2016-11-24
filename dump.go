@@ -5,8 +5,7 @@ import (
 )
 
 // analog of libc strlen on a []byte
-func strlen(s []byte) int {
-	i := 0
+/*	i := 0
 	for ; i < len(s); i++ {
 		if s[i] == 0 {
 			break
@@ -14,7 +13,7 @@ func strlen(s []byte) int {
 	}
 	return i
 }
-
+*/
 const count = 16 // Number of bytes to print each line
 
 // endLine has two jobs. First pad remainder of line if <16
@@ -29,21 +28,25 @@ hbarta@swanky:~/Documents/go-wks/src/github.com/HankB/playground$ hexdump -C ~/g
 hbarta@swanky:~/Documents/go-wks/src/github.com/HankB/playground$
 */
 func endLine(str []byte) {
-  add := count - strlen(str)
+  add := count - len(str)
+  //fmt.Printf("add=%d", add)
   if add < 0 {  // test for pathalogical case
     add = 0
   }
-  // add spaces so ASCII rep lines up with pervious line
+  // add spaces so ASCII rep lines up with previous line
   for i:=0; i<add; i++ {
     fmt.Printf("   ")
   }
-  if add <= count/2 {
+  // add an extra 'midline' space
+  if add < count/2 {
     fmt.Printf(" ")
   }
 	fmt.Printf("|%s|\n", str)
 }
 
 // Format output similarly to 'hexdump -D'
+// pass both strting and length since the string can include nil values
+// the length of valid characters is included t
 func Dump(b string) {
 	chars := 0 // chars printed
 	asciiRep := []byte{}
