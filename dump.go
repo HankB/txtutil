@@ -38,10 +38,10 @@ func endLine(str []byte) {
     fmt.Printf("   ")
   }
   // add an extra 'midline' space
-  if add < count/2 {
+  if add >= count/2 {
     fmt.Printf(" ")
   }
-	fmt.Printf("|%s|\n", str)
+	fmt.Printf(" |%s|\n", str)
 }
 
 // Format output similarly to 'hexdump -D'
@@ -59,7 +59,7 @@ func Dump(b string) {
 					if chars < 8 {
 						asciiRep = append(asciiRep, ' ')
 					}
-					fmt.Printf(" |%s|\n", asciiRep)
+					fmt.Printf("  |%s|\n", asciiRep)
 					asciiRep = []byte{}
 				}
 			}

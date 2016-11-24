@@ -46,7 +46,7 @@ func ExampleTxtutil() {
 */
 
 func ExampleTxtutildump() {
-  fmt.Printf("00000000  68 65 6c 6c 6f 20 77 6f  72 6c 64                 |hello world| << canonical")
+  fmt.Printf("00000000  68 65 6c 6c 6f 20 77 6f  72 6c 64                 |hello world| << canonical\n")
 	// don't understand why this test fails
 	txtutil.Dump("hello world")
 	// Output:
@@ -60,6 +60,9 @@ func ExampleTxtutildump() {
   txtutil.Dump(MAGIC)
   // Output:
   // 00000000  00 06 71 61                                       |..qa|
+  txtutil.Dump("hello world agai")
+	// Output:
+	// 00000000  68 65 6c 6c 6f 20 77 6f  72 6c 64                 |hello world|
   txtutil.Dump("hello world")
 	// Output:
 	// 00000000  68 65 6c 6c 6f 20 77 6f  72 6c 64                 |hello world|
