@@ -19,6 +19,7 @@ const PADDING_2 = "\x00\x00\x00\x00"
 const ON = "\x01"
 const OFF = "\x00"
 
+// TestIsPrint tests IsPrint()
 func TestIsPrint(t *testing.T) {
 	if !txtutil.IsPrint(' ') {
 		t.Fail()

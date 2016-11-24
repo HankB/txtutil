@@ -67,7 +67,7 @@ func Dump(b string) {
 	fmt.Printf("%8.8x\n", chars) // print final character count
 }
 
-// IsPrint() is exported only for testing. (Can't get the export_test.g thing to work)
+// IsPrint is exported only for testing. (Can't get the export_test.g thing to work)
 func IsPrint(b byte) bool {
 	if b >= ' ' && b <= '~' {
 		return true
