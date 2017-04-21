@@ -27,7 +27,7 @@ var requiredPrintlnPri = 3
 // FmtPrintln outputs remaining arguments according to the value
 // of the first argument.
 func FmtPrintln(pri int, a ...interface{}) (n int, err error) {
-	if pri < requiredPrintlnPri {
+	if pri >= requiredPrintlnPri {
 		return fmt.Println(a...)
 	}
 	return 0, nil
