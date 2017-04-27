@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-var requiredDumpPri = 3
+var requiredDumpPri = 4
 
 // PriDump Dumps if priority criteria is met
 func PriDump(pri int, b string) {
@@ -22,19 +22,19 @@ func SetDumpPriority(pri int) int {
 	return retVal
 }
 
-var requiredPrintlnPri = 3
+var requiredPrintlnPri = 4
 
-// FmtPrintln outputs remaining arguments according to the value
+// PriFmtPrintln outputs remaining arguments according to the value
 // of the first argument.
-func FmtPrintln(pri int, a ...interface{}) (n int, err error) {
+func PriFmtPrintln(pri int, a ...interface{}) (n int, err error) {
 	if pri >= requiredPrintlnPri {
 		return fmt.Println(a...)
 	}
 	return 0, nil
 }
 
-// SetPrintlnPriority updates the priority and returns the previous value
-func SetPrintlnPriority(pri int) int {
+// SetPriPrintlnPriority updates the priority and returns the previous value
+func SetPriPrintlnPriority(pri int) int {
 	retVal := requiredPrintlnPri
 	requiredPrintlnPri = pri
 	return retVal
